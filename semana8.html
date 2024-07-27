@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agencia de Viajes - Búsqueda de Vuelos y Paquetes</title>
+    <style>
+        /* Estilo básico para ocultar las opciones no coincidentes */
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Bienvenido a la Agencia de Viajes</h1>
     <form id="searchForm">
+        <label for="search">Buscar destino:</label>
+        <input type="text" id="search" name="search" placeholder="Buscar...">
+        <br>
         <label for="destination">Destino:</label>
         <select id="destination" name="destination">
             <option value="londres">Londres</option>
@@ -25,5 +34,23 @@
         <br>
         <button type="submit">Buscar</button>
     </form>
+
+    <script>
+        // Función para filtrar destinos según la entrada de búsqueda
+        document.getElementById('search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const destinationSelect = document.getElementById('destination');
+            const options = destinationSelect.getElementsByTagName('option');
+
+            for (let option of options) {
+                const destinationText = option.textContent.toLowerCase();
+                if (destinationText.includes(searchTerm)) {
+                    option.classList.remove('hidden');
+                } else {
+                    option.classList.add('hidden');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
